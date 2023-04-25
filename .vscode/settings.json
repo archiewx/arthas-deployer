@@ -1,0 +1,6 @@
+{
+  "deno.enable": true,
+  "deno.unstable": true,
+  "deno.suggest.autoImports": true,
+  "typescript.preferences.quoteStyle": "double"
+}
