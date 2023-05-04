@@ -1,0 +1,30 @@
+name: Deno Build
+on:
+  push:
+    tags:
+      - "v**"
+jobs:
+  build:
+    name: Build Binary Package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+      - name: Build
+        run: deno compile --allow-net --allow-run --allow-read --output deployer serve.ts
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - Release Binary Package
+          artifacts: "deployer"
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
