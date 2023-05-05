@@ -15,7 +15,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
       - name: Build
-        run: deno compile --allow-net --allow-run --allow-read --output deployer --unstable  serve.ts -- --optimize
+        run: deno compile --allow-net --allow-run --allow-read --output deployer --unstable --target x86_64-unknown-linux-gnu serve.ts -- --optimize
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
